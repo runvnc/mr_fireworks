@@ -6,7 +6,7 @@ from openai import AsyncOpenAI
 import json
 
 client = AsyncOpenAI(
-    api_base="https://api.fireworks.ai/inference/v1",
+    base_url="https://api.fireworks.ai/inference/v1",
     api_key = os.environ.get("FIREWORKS_API_KEY", "NOKEY"),
 )
 
