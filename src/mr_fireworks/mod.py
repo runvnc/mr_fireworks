@@ -6,6 +6,8 @@ from openai import AsyncOpenAI
 import json
 
 client = AsyncOpenAI(
+    api_base="https://api.fireworks.ai/inference/v1",
+    api_key = os.environ.get("FIREWORKS_API_KEY", "NOKEY"),
 )
 
 def concat_text_lists(message):
@@ -43,8 +45,6 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         messages = [concat_text_lists(m) for m in messages]
 
         stream = await client.chat.completions.create(
-            api_base="https://api.fireworks.ai/inference/v1",
-            api_key = os.environ.get("FIREWORKS_API_KEY", "NOKEY"),
             model=model_name,
             messages=messages,
             stream=True,
