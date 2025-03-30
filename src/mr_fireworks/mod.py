@@ -22,7 +22,8 @@ def concat_text_lists(message):
             if isinstance(item, str):
                 out_str += item + "\n"
             else:
-                out_str += item['text'] + "\n"
+                if 'text' in item:
+                    out_str += item['text'] + "\n"
     message.update({'content': out_str})
     return message
 
