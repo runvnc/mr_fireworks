@@ -30,7 +30,7 @@ def concat_text_lists(message):
 async def stream_chat(model, messages=[], context=None, num_ctx=200000, 
                      temperature=0.0, max_tokens=5000, num_gpu_layers=0):
     try:
-        print("DeepSeek stream_chat (OpenAI compatible mode)")
+        print("Fireworks stream_chat (OpenAI compatible mode)")
         
         model_name = os.environ.get("AH_OVERRIDE_LLM_MODEL", "accounts/fireworks/models/deepseek-r1-basic")
         reasoning = False
