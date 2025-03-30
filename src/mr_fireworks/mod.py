@@ -72,7 +72,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                     yield without_quotes
                     print('\033[92m' + str(delta.reasoning_content) + '\033[0m', end='')
                 elif hasattr(delta, 'content'):
-                    if delta.content = "<think>":
+                    if delta.content == "<think>":
                         yield '[{"reasoning": "'
                     elif delta.content == "</think>":
                         yield '"}] <<CUT_HERE>>'
