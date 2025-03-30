@@ -56,8 +56,8 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
 
         async def content_stream(original_stream):
             done_reasoning = False
-            if reasoning:
-                yield '[{"reasoning": "'
+            #if reasoning:
+            #    yield '[{"reasoning": "'
             async for chunk in original_stream:
                 if os.environ.get('AH_DEBUG') == 'True':
                     print('\033[93m' + str(chunk) + '\033[0m', end='')
@@ -72,7 +72,9 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                     yield without_quotes
                     print('\033[92m' + str(delta.reasoning_content) + '\033[0m', end='')
                 elif hasattr(delta, 'content'):
-                    if reasoning and not done_reasoning:
+                    if delta.content = "<think>":
+                        yiedl '[{"reasoning": "'
+                    elif delta.content == "</think>":
                         yield '"}] <<CUT_HERE>>'
                         done_reasoning = True
                     yield delta.content or ""
