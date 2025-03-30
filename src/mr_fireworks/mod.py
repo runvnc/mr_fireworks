@@ -61,7 +61,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         #    messages = messages[:-1]
 
         #messages = [concat_text_lists(m) for m in messages]
-        messages = [remove_text_before_image(m) for m in messages]
+        messages = [remove_text_near_image(m) for m in messages]
 
         stream = await client.chat.completions.create(
             model=model_name,
