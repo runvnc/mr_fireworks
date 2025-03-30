@@ -43,7 +43,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         #if last_role == second_last_role:
         #    messages = messages[:-1]
 
-        messages = [concat_text_lists(m) for m in messages]
+        #messages = [concat_text_lists(m) for m in messages]
 
         stream = await client.chat.completions.create(
             model=model_name,
