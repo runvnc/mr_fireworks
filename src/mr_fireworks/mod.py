@@ -28,7 +28,7 @@ def concat_text_lists(message):
     message.update({'content': out_str})
     return message
 
-def remove_text_before_image(message):
+def remove_text_near_image(message):
     """Remove text before image in a message"""
     if isinstance(message['content'], str):
         return message
@@ -40,7 +40,7 @@ def remove_text_before_image(message):
                     image_index = i
                     break
             if image_index > 0:
-                message['content'] = message['content'][image_index:]
+                message['content'] = [message['content'][image_index]]
     return message
 
 
