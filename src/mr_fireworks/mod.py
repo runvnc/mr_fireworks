@@ -49,6 +49,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
             model=model_name,
             messages=messages,
             stream=True,
+            response_format={ type: "json_object" },
             temperature=temperature,
             max_tokens=max_tokens
         )
@@ -109,7 +110,7 @@ async def format_image_message(pil_image, context=None):
     return {
         "type": "image_url",
         "image_url": {
-            "url": f"data:image/png;base64,{image_base64}#transform=inline"
+            "url": f"data:image/png;base64,{image_base64}"
         }
     }
 
