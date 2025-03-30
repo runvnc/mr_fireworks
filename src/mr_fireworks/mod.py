@@ -132,7 +132,7 @@ async def format_image_message(pil_image, context=None):
     return {
         "type": "image_url",
         "image_url": {
-            "url": f"data:image/png;base64,{image_base64}"
+            "url": f"data:image/png;base64,{image_base64}#transform=inline"
         }
     }
 
