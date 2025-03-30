@@ -82,7 +82,12 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                         done_reasoning = True
                     if delta.content is None:
                         continue
-                    yield delta.content or ""
+                    if reasoning and not done_reasoning:
+                        json_str = json.dumps(delta.content)
+                        without_quotes = json_str[1:-1]
+                        yield without_quotes    
+                    else:
+                        yield delta.content or ""
 
         return content_stream(stream)
 
