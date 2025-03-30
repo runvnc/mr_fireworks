@@ -39,7 +39,7 @@ def remove_text_near_image(message):
                 if isinstance(item, dict) and 'type' in item and item['type'] == 'image_url':
                     image_index = i
                     break
-            if image_index > 0:
+            if image_index >= 0:
                 message['content'] = [message['content'][image_index]]
     return message
 
@@ -62,6 +62,9 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
 
         #messages = [concat_text_lists(m) for m in messages]
         messages = [remove_text_near_image(m) for m in messages]
+
+        print("..........................................................................................")
+        print(messages)
 
         stream = await client.chat.completions.create(
             model=model_name,
