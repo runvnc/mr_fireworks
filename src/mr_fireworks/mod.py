@@ -4,6 +4,7 @@ import base64
 from io import BytesIO
 from openai import AsyncOpenAI
 import json
+import traceback
 
 client = AsyncOpenAI(
     base_url="https://api.fireworks.ai/inference/v1",
@@ -95,7 +96,9 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         return content_stream(stream)
 
     except Exception as e:
+        trace = traceback.format_exc()
         print('Fireworks.ai (OpenAI mode) error:', e)
+        print(trace)
         #raise
 
 @service()
