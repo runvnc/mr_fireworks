@@ -37,8 +37,8 @@ def remove_text_before_image(message):
             image_index = -1
             for i, item in enumerate(message['content']):
                 if isinstance(item, dict) and 'type' in item and item['type'] == 'image_url':
-                image_index = i
-                break
+                    image_index = i
+                    break
             if image_index > 0:
                 message['content'] = message['content'][image_index:]
     return message
