@@ -28,6 +28,22 @@ def concat_text_lists(message):
     message.update({'content': out_str})
     return message
 
+def remove_text_before_image(message):
+    """Remove text before image in a message"""
+    if isinstance(message['content'], str):
+        return message
+    else:
+        if isinstance(message['content'], list):
+            image_index = -1
+            for i, item in enumerate(message['content']):
+                if isinstance(item, dict) and 'type' in item and item['type'] == 'image_url':
+                image_index = i
+                break
+            if image_index > 0:
+                message['content'] = message['content'][image_index:]
+    return message
+
+
 @service()
 async def stream_chat(model, messages=[], context=None, num_ctx=200000, 
                      temperature=0.0, max_tokens=5000, num_gpu_layers=0):
@@ -45,6 +61,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         #    messages = messages[:-1]
 
         #messages = [concat_text_lists(m) for m in messages]
+        messages = [remove_text_before_image(m) for m in messages]
 
         stream = await client.chat.completions.create(
             model=model_name,
