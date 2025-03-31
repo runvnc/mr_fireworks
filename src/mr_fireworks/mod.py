@@ -55,13 +55,16 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         if "r1" in model_name:
             reasoning = True
 
+        if model is not None:
+            model_name = model
+
         #last_role = messages[-1]['role']
         #second_last_role = messages[-2]['role']
         #if last_role == second_last_role:
         #    messages = messages[:-1]
 
         #messages = [concat_text_lists(m) for m in messages]
-        messages = [remove_text_near_image(m) for m in messages]
+        #messages = [remove_text_near_image(m) for m in messages]
 
         print("..........................................................................................")
         print(messages)
