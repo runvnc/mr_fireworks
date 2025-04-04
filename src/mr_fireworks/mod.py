@@ -52,11 +52,11 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         
         model_name = os.environ.get("AH_OVERRIDE_LLM_MODEL", "accounts/fireworks/models/deepseek-r1-basic")
         reasoning = False
-        if "r1" in model_name:
-            reasoning = True
-
         if model is not None:
             model_name = model
+
+            if "r1" in model_name:
+            reasoning = True
 
         #last_role = messages[-1]['role']
         #second_last_role = messages[-2]['role']
