@@ -55,7 +55,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
         if model is not None:
             model_name = model
 
-            if "r1" in model_name:
+        if "r1" in model_name:
             reasoning = True
 
         #last_role = messages[-1]['role']
