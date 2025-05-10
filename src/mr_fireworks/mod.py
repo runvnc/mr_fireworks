@@ -79,8 +79,9 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
 
         print("Opened stream with model:", model_name)
 
-        async def content_stream(original_stream):
+        async def content_stream(original_stream, is_reasoning):
             done_reasoning = False
+            reasoning = is_reasoning
             if reasoning:
                 yield '[{"reasoning": "'
             async for chunk in original_stream:
@@ -121,7 +122,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                     else:
                         yield delta.content or ""
 
-        return content_stream(stream)
+        return content_stream(stream, reasoning)
 
     except Exception as e:
         trace = traceback.format_exc()
