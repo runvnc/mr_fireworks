@@ -100,12 +100,15 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                     yield without_quotes
                     print('\033[92m' + str(delta.reasoning_content) + '\033[0m', end='')
                 elif hasattr(delta, 'content'):
-                    if delta.content is not None and  "</think>" in delta.content:
+                    if delta.content is not None and "<think>" in delta.content:
+                        reasoning = True
+                    elif delta.content is not None and  "</think>" in delta.content:
                         yield '"}] <<CUT_HERE>>' 
                         #yield '"}, '
                         print('END REASONING!')
                         done_reasoning = True
                         continue
+                    
                     elif delta.content is None:
                         continue
                     if reasoning and not done_reasoning:
