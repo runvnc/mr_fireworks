@@ -111,6 +111,7 @@ async def stream_chat(model, messages=[], context=None, num_ctx=200000,
                         continue
                     elif delta.content is not None and  "</think>" in delta.content:
                         parts = delta.content.split("<think>")
+                        remaining = ""
                         if len(parts) > 1:
                             remaining = delta.content.split("</think>")[1]
                         done_reasoning = True
